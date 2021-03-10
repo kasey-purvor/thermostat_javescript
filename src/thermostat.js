@@ -1,23 +1,29 @@
 'use strict'
 
 class Thermostat{
-
   constructor() {
     this.temp = 20;
     this.ps = true;
   }
-
-  change(amount){
-    if(this.temp + amount < 10) {
-      throw new Error('Cannot set below 10 degreeeees');
-    }
-    if((this.temp + amount > 25) && this.ps === true) {
-      throw new Error('Cannot set above 25 degreeeees in power save mode');
-    }
-    if((this.temp + amount > 32) && this.ps === false) {
+  temp(){
+    return this.temp();
+  };
+  
+  up(){
+    if((this.temp + 1 > 32) && this.ps === false) {
       throw new Error('Cannot set above 32 degreeeees in power save mode off');
     }
-      this.temp += amount;
+    if((this.temp + 1 > 25) && this.ps === true) {
+      throw new Error('Cannot set above 25 degreeeees in power save mode');
+    }
+      this.temp += 1;
+  };
+
+  down() {
+    if(this.temp - 1 < 10) {
+      throw new Error('Cannot set below 10 degreeeees');
+    };
+    this.temp -= 1 ;
   };
 
   psOff(){
